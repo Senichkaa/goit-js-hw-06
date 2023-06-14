@@ -7,29 +7,30 @@ function getRandomHexColor() {
 const destroyButton = document.querySelector('[data-destroy]');
 const createButton = document.querySelector('[data-create]');
 const boxesValue = document.querySelector('#boxes');
-const controlsValue = document.querySelector('#controls')
+const controlsValue = document.querySelector('#controls > input')
 
-// not working :(
+createButton.addEventListener('click', event => {
+  createBoxes(controlsValue.value);
+})
 
-// createButton.addEventListener('click', event => {
-//   createSomeBoxes(controlsValue.value);
-// }); 
+destroyButton.addEventListener('click', destroyBoxes);
 
-// destroyButton.addEventListener('click',destroySomeBoxes);
+function createOneBox(size, bgc) {
+  return `<div style="width: ${size}px; height: ${size}px; background-color: ${getRandomHexColor()}"></div>`;
+}
 
-// const createBox(size, bcg) = `<div style= "width = ${size}";"height = ${size}";backgroundColor = ${bcg}>`;
 
-// function createSomeBoxes(amount) {
-//   let size = 30;
-//   const createdBoxes = [];
-//  for (let index = 0; index < amount; index +=1) {
-//   size += 10;
-//    createdBoxes.push(createBox(size, getRandomHexColor()));
-//  }
-//   boxesValue.insertAdjacentHTML("beforeend", createdBoxes.join(''));
-// }
+function createBoxes(amount) {
+  let size = 30;
+  const boxStack = [];
 
-// function destroySomeBoxes() {
-//   boxesValue.innerHTML = "";
-// }
+  for (let index = 0; index < amount; index += 1) {
+    size += 10;
+    boxStack.push(createOneBox(size, getRandomHexColor()));
+  }
+  boxesValue.insertAdjacentHTML("beforeend", boxStack.join(""));
+}
 
+function destroyBoxes() {
+  boxesValue.innerHTML = "";
+}
