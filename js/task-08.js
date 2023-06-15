@@ -1,6 +1,8 @@
 const formEl = document.querySelector('.login-form');
 
-formEl.addEventListener('submit',onSubmit);
+formEl.addEventListener('submit', onSubmit);
+
+const newUser = {};
 
 function onSubmit(event) {
     event.preventDefault(); 
@@ -10,12 +12,15 @@ function onSubmit(event) {
     formData.forEach((value, key) => {
         if (value === '') {
             alert("Містяться незаповнені поля. Заповніть їх.");
+            
         }
-        const newUser = {
-            key: value,
+        else {
+            newUser[key] = value;
         }
-        console.log(newUser);
-        formEl.reset();
-
+        
+        
     })
+    console.log(newUser);
+    formEl.reset();
+    
 }
